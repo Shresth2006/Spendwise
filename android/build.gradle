@@ -15,7 +15,32 @@ buildscript {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath("com.google.gms:google-services:4.4.2")
     }
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://www.jitpack.io" }
+    }
+
+    // This block catches calls to jcenter() from subprojects 
+    // and redirects them to mavenCentral internally.
+    project.ext.set("jcenter", { ->
+        project.repositories.mavenCentral()
+    })
+}
+
+// Clean-up logic for root-level jcenter calls
+subprojects {
+    buildscript {
+        repositories {
+            google()
+            mavenCentral()
+        }
+    }
+}
