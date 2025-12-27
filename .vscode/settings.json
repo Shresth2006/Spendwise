@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "java.errors.incompleteClasspath.severity": "ignore",
+  "java.configuration.updateBuildConfiguration": "automatic"
+}
