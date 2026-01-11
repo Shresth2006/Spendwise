@@ -10,15 +10,18 @@ from database import db, update_user_budget_settings, get_user_budget_settings
 from schemas import BudgetUpdate, TransactionCreate
 
 app = FastAPI(title="SpendWise Multi-User API")
-
+# CORS Middleware Configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Allows all origins for mobile app access
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # Allows GET, POST, PUT, DELETE, etc.
+    allow_headers=["*"],  # Allows all headers
 )
 
+@app.get("/")
+async def root():
+    return {"message": "SpendWise Backend is Online"}
 # --- DATA MODELS ---
 
 class GoalUpdate(BaseModel):

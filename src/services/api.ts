@@ -1,7 +1,7 @@
 import axios from 'axios';
 import auth from '@react-native-firebase/auth';
 
-const BASE_URL = 'spendwise-production-cab0.up.railway.app'; // Change to .93 for your friend
+const BASE_URL = 'https://spendwise-production-cab0.up.railway.app'; // Change to .93 for your friend
 
 const api = axios.create({
   baseURL: BASE_URL,
