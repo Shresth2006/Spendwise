@@ -1,14 +1,25 @@
+import os
+import json
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# Initialize Firebase Admin SDK
-if not firebase_admin._apps:
-    # Ensure serviceAccountKey.json is in the same directory as this file
-    cred = credentials.Certificate("serviceAccountKey.json")
-    firebase_admin.initialize_app(cred)
+def initialize_firebase():
+    # Try to get the JSON string from Railway environment variables
+    firebase_json = os.environ.get('FIREBASE_CONFIG_JSON')
+    
+    if firebase_json:
+        # PRODUCTION: Parse the JSON string into a dictionary
+        cred_dict = json.loads(firebase_json)
+        cred = credentials.Certificate(cred_dict)
+    else:
+        # LOCAL: Fallback to the local file for development
+        cred = credentials.Certificate("serviceAccountKey.json")
+    
+    if not firebase_admin._apps:
+        firebase_admin.initialize_app(cred)
 
+initialize_firebase()
 db = firestore.client()
-
 def get_firestore_db():
     """Returns the Firestore client instance."""
     return db
