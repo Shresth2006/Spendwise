@@ -66,7 +66,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 ### 2. Run the Mobile App
 
-Open a new terminal window at the project root:
+Open a new terminal window at the project root:-
 
 ```bash
 # Install dependencies
